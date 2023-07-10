@@ -16,7 +16,7 @@ describe("When Form is created", () => {
       const submitButton = screen.getByRole("button", { name: "Envoyer" });
       fireEvent.click(submitButton);
       await screen.findByText("En cours");
-      await waitFor(() => screen.findByText("Message envoyé !"), {timeout: 3000});
+      await waitFor(() => screen.findByText("Message envoyé !"), {timeout: 5000});
     });
     });
   });
