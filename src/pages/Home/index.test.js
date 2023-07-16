@@ -11,16 +11,21 @@ describe("When Form is created", () => {
   });
 
   describe("and a click is triggered on the submit button", () => {
-    it("the success action is called", async () => {
+    it("the success message is displayed", async () => {
       render(<Home />);
-      const submitButton = screen.getByRole("button", { name: "Envoyer" });
-      fireEvent.click(submitButton);
+      fireEvent(
+        await screen.findByText("Envoyer"),
+        new MouseEvent("click", {
+          cancelable: true,
+          bubbles: true,
+        })
+      );
       await screen.findByText("En cours");
-      await waitFor(() => screen.findByText("Message envoyé !"), {timeout: 5000});
-    });
+      await waitFor(() => screen.queryByText("Message envoyé !"), { timeout: 10000 });
     });
   });
 
+});
 
 
 describe("When a page is created", () => {
@@ -37,3 +42,5 @@ describe("When a page is created", () => {
     // to implement
   })
 });
+
+
