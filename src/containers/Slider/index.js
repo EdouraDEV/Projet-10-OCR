@@ -15,7 +15,7 @@ const Slider = () => {
     setTimeout(
       // length = 3 alors que max index = 2
       () => {
-        if (data) {
+        if (byDateDesc) {
         setIndex(index < byDateDesc.length - 1 ? index + 1 : 0)}
       },
       5000
@@ -24,18 +24,12 @@ const Slider = () => {
   useEffect(() => {
     nextCard();
   });
-  if (!data) {
-    return <div>Loading ...</div>
-  }
-  console.log(byDateDesc);
   return (
     <div className="SlideCardList">
-      {byDateDesc?.map((event, idx) => (
-        <>
+      {byDateDesc?.map((event, idx) => 
+        
           <div
-            // eslint-disable-next-line react/no-array-index-key
-            key={`${event.id} - ${idx}`}
-            data-test={`${event.id} - ${idx}`}
+            key={event.id}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -48,14 +42,14 @@ const Slider = () => {
                 <div>{getMonth(new Date(event.date))}</div>
               </div>
             </div>
-          </div>
-          <div className="SlideCard__paginationContainer">
+          </div>       
+      )}
+
+      <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((eventDate, radioIdx) => (
+              {byDateDesc?.map((event, radioIdx) => (
                 <input
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={`${event.id} - ${idx} - ${radioIdx}`}
-                  data-test={`${event.id} - ${idx} - ${radioIdx}`}
+                  key={event.id}
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx}
@@ -63,8 +57,6 @@ const Slider = () => {
               ))}
             </div>
           </div>
-        </>
-      ))}
     </div>
   );
 };
